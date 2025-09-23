@@ -5,6 +5,7 @@ Program to determine score status
 
 from random import randint
 
+
 def main():
     grade_score = float(input("Enter score: "))
     print(determine_result_status(grade_score))
