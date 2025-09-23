@@ -9,7 +9,7 @@ def main():
 def get_password(MINIMUM_CHARACTERS):
     password = input(f"Enter password of at least {MINIMUM_CHARACTERS} characters: ")
     while len(password) < MINIMUM_CHARACTERS:
-        print("Password too short")
+        print("Password is too short, please try again!")
         password = input(f"Enter password of at least {MINIMUM_CHARACTERS} characters: ")
     return password
 
