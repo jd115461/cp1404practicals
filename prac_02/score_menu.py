@@ -6,7 +6,7 @@ Q - Quit"""
 
 def main():
     score = get_valid_score()
-    print("MENU: ")
+    print(MENU)
     choice = input("> ").upper()
     while choice != "Q":
         if choice == "G":
@@ -17,7 +17,7 @@ def main():
             print(print_stars(score))
         else:
             print("Invalid choice")
-        print("Menu: ")
+        print(MENU)
         choice = input("> ").upper()
     print("Goodbye")
 
