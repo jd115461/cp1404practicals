@@ -7,4 +7,5 @@
 # The smallest number could have been 2.5 and the largest 5.5
 
 import random
+
 print(random.randint(1, 100))
