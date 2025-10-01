@@ -1,3 +1,8 @@
+"""
+CP1404/CP5632 - Practical
+Random file using the randint function
+"""
+
 # On line 1 the answer was 8
 # The smallest number could have been a 5 and the largest 20
 # On line 2 the  umber was 5
