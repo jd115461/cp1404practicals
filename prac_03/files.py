@@ -10,6 +10,12 @@ Make the appropriate choice of file-reading technique for each of these question
 # 1
 FILENAME = "name.txt"
 out_file = open(FILENAME, 'w')
-name = input("What is your name?: ")
+name = input("What is your name? ")
 print(name, file=out_file)
 out_file.close()
+
+# 2
+in_file = open("name.txt", "r")
+name = in_file.read().strip()
+in_file.close()
+print(f"Hello, {name}!")
