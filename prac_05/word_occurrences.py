@@ -1,7 +1,7 @@
 """
 Word Occurrences
 Estimate: 17 minutes 51 seconds 810 millisecond
-Actual:
+Actual: 9 minutes 38 seconds 680 millisecond
 """
 
 words_to_count = {}
