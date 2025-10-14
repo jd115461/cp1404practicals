@@ -1,7 +1,7 @@
 """
 Emails
 Estimate: 21 minutes 26 seconds 760 millisecond
-Actual:   minutes  seconds millisecond
+Actual:  22 minutes  16 seconds 450 millisecond
 """
 
 FILENAME = "wimbledon.csv"
