@@ -1,6 +1,8 @@
 """
 CP1404/CP5632 Practical
 Basic tests for Guitar class code
+Expected time: 7.5 minutes
+Actual time: approx 5 minutes
 """
 from prac_06.guitar import Guitar
 

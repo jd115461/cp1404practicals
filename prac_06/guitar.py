@@ -1,6 +1,8 @@
 """
 CP1404/CP5632 Practical
 Guitar class
+Expected time: 5 minutes
+Actual time: approx 4 minutes
 """
 from datetime import date
 
