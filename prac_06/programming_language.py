@@ -2,7 +2,7 @@
 CP1404/CP5632 Practical
 Programming Language class code
 Estimate: 12 minutes 21 seconds 291 millisecond
-Actual:   minutes seconds  millisecond
+Actual: 15 minutes 56 seconds 120 millisecond
 """
 
 
