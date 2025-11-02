@@ -2,7 +2,7 @@
 CP1404/CP5632 Practical
 Guitar program to use the Guitar class created
 Expected time: 15 minutes, 48 seconds
-Actual time: approx  minutes
+Actual time: 20 minutes, 27 seconds
 """
 from prac_06.guitar import Guitar
 
