@@ -2,6 +2,9 @@
 CP1404/CP5632 Practical
 Guitar class
 """
+from datetime import date
+
+VINTAGE_AGE = 50
 
 
 class Guitar:
@@ -18,5 +21,10 @@ class Guitar:
         return f"{self.name} ({self.year}) : ${self.cost:,.2f}"
 
     def get_age(self):
+        """Get the current age of a guitar."""
+        current_year = date.today().year
+        return current_year - self.year
 
-
+    def is_vintage(self):
+        """Determine if a guitar is considered vintage or not based on if it's older than 50 years old."""
+        return self.get_age() >= VINTAGE_AGE
