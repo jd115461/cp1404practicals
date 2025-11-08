@@ -27,7 +27,9 @@ def main():
     choice = input(">>> ").strip().upper()
     while choice != "Q":
         if choice == "L":
-            pass
+            filename = input("Filename to load projects from: ").strip()
+            projects = load_projects(filename)
+            print(f"Loaded {len(projects)} projects from {filename}.")
         elif choice == "S":
             filename = input("Filename to save projects to: ").strip()
             save_projects(filename, projects)
@@ -92,8 +94,58 @@ def sort_projects():
     pass
 
 
-def add_project():
-    pass
+def add_project(projects):
+    """Prompt for a new project and add it as incomplete to the list"""
+    print("Let's add a new project")
+    name = input("Name: ").strip()
+    while name == "":
+        print("Input can not be blank")
+        name = input("Name: ").strip()
+
+    start_date = input("Start date (dd/mm/yyyy): ").strip()
+    while start_date == "":
+        print("Input can not be blank")
+        start_date = input("Start date (dd/mm/yyyy): ").strip()
+
+    priority = 0
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            priority = int(input("Priority: "))
+            if priority <= 0:
+                print("Number must be > 0")
+            else:
+                is_valid_input = True
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    cost_estimate = 0.0
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            cost_estimate = float(input("Cost estimate: $"))
+            if cost_estimate < 0:
+                print("Number must be > 0")
+            else:
+                is_valid_input = True
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    completion_percentage = 0
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            completion_percentage = int(input("Percent complete: "))
+            if completion_percentage <= 0:
+                print("Number must be > 0")
+            else:
+                is_valid_input = True
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    new_project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+    projects.append(new_project)
+    print(f"Project '{name}' added successfully.")
 
 
 def update_project():
