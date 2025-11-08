@@ -5,7 +5,6 @@ Estimated time: 2 hours
 Actual time:
 """
 
-import datetime
 from project import Project
 
 FILENAME = "projects.txt"
@@ -20,4 +19,68 @@ MENU = """- (L)oad projects
 
 
 def main():
+    """Run the Project Management Program."""
+    print("Welcome to Pythonic Project Management")
+    projects = load_projects(FILENAME)
+    print(f"Loaded {len(projects)} projects from projects.txt.")
+    print(MENU)
+    choice = input(">>> ").strip().upper()
+    while choice != "Q":
+        if choice == "L":
+            pass
+        elif choice == "S":
+            pass
+        elif choice == "D":
+            pass
+        elif choice == "F":
+            pass
+        elif choice == "A":
+            pass
+        elif choice == "U":
+            pass
+        else:
+            print("Invalid menu choice")
+        print(MENU)
+        choice = input(">>> ").strip().upper()
+    print("Thank you for using custom-built project management software.")
+
+
+def load_projects(filename):
+    projects = []
+    with open(filename, "r", encoding="utf-8-sig") as input_file:
+        input_file.readline()
+        for line in input_file:
+            parts = line.strip().split("\t")
+            name, start_date, priority_str, cost_str, completion_str = parts
+
+            priority = int(priority_str)
+            cost_estimate = float(cost_str)
+            completion_percentage = int(completion_str)
+
+            project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+            projects.append(project)
+    return projects
+
+def save_projects():
     pass
+
+
+def display_projects(projects):
+    """Display incomplete and completed projects, sorted by priority."""
+    pass
+
+
+def sort_projects():
+    pass
+
+
+def add_project():
+    pass
+
+
+def update_project():
+    pass
+
+
+if __name__ == "__main__":
+    main()
