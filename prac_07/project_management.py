@@ -29,7 +29,9 @@ def main():
         if choice == "L":
             pass
         elif choice == "S":
-            pass
+            filename = input("Filename to save projects to: ").strip()
+            save_projects(filename, projects)
+            print(f"Projects saved to {filename}")
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
@@ -63,7 +65,12 @@ def load_projects(filename):
 
 
 def save_projects(filename, projects):
-    pass
+    """Save all changes to projects to the given file name."""
+    with open(filename, "w", encoding="utf-8-sig") as output_file:
+        print("Name\tStart Date\tPriority\tCost Estimate\tCompletion Percentage", file=output_file)
+        for project in projects:
+            output_file.write(
+                f"{project.name}\t{project.start_date}\t{project.priority}\t{project.cost_estimate}\t{project.completion_percentage}\n")
 
 
 def display_projects(projects):
