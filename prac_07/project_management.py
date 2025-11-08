@@ -31,7 +31,7 @@ def main():
         elif choice == "S":
             pass
         elif choice == "D":
-            pass
+            display_projects(projects)
         elif choice == "F":
             pass
         elif choice == "A":
@@ -61,13 +61,24 @@ def load_projects(filename):
             projects.append(project)
     return projects
 
-def save_projects():
+
+def save_projects(filename, projects):
     pass
 
 
 def display_projects(projects):
     """Display incomplete and completed projects, sorted by priority."""
-    pass
+    incomplete_projects = [project for project in projects if not project.is_complete()]
+    completed_projects = [project for project in projects if project.is_complete()]
+    incomplete_projects.sort()
+    completed_projects.sort()
+
+    print("Incomplete projects:")
+    for project in incomplete_projects:
+        print(f" {project}")
+    print("Complete projects:")
+    for project in completed_projects:
+        print(f" {project}")
 
 
 def sort_projects():
