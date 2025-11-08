@@ -39,9 +39,9 @@ def main():
         elif choice == "F":
             pass
         elif choice == "A":
-            pass
+            add_project(projects)
         elif choice == "U":
-            pass
+            update_project(projects)
         else:
             print("Invalid menu choice")
         print(MENU)
@@ -112,10 +112,10 @@ def add_project(projects):
     while not is_valid_input:
         try:
             priority = int(input("Priority: "))
-            if priority <= 0:
-                print("Number must be > 0")
-            else:
+            if 0 <= priority <= 10:
                 is_valid_input = True
+            else:
+                print("Number must be between 1 and 10")
         except ValueError:
             print("Invalid input - please enter a valid number")
 
@@ -136,10 +136,10 @@ def add_project(projects):
     while not is_valid_input:
         try:
             completion_percentage = int(input("Percent complete: "))
-            if completion_percentage <= 0:
-                print("Number must be > 0")
-            else:
+            if 0 <= completion_percentage <= 100:
                 is_valid_input = True
+            else:
+                print("Number must be between 0 and 100")
         except ValueError:
             print("Invalid input - please enter a valid number")
 
@@ -148,8 +148,55 @@ def add_project(projects):
     print(f"Project '{name}' added successfully.")
 
 
-def update_project():
-    pass
+def update_project(projects):
+    """Prompt user for a project number and update com"""
+    incomplete_projects = [project for project in projects if not project.is_complete()]
+    if not incomplete_projects:
+        print("All projects have been completed .")
+        return
+
+    for i, project in enumerate(incomplete_projects, start=1):
+        print(f"{i} {project}")
+
+    is_valid_input = False
+    while not is_valid_input:
+        try:
+            chosen_project = int(input("Project choice: "))
+            if chosen_project <= 0:
+                print("Number must be > 0")
+            elif chosen_project > len(incomplete_projects):
+                print("Invalid book number")
+            else:
+                is_valid_input = True
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    chosen_project = incomplete_projects[chosen_project - 1]
+    print(f"Selected {chosen_project}")
+
+    updated_percentage_input = input("New Percentage: ").strip()
+    if updated_percentage_input != "":
+        try:
+            updated_percentage = int(updated_percentage_input)
+            if 0 <= updated_percentage <= 100:
+                chosen_project.completion_percentage = updated_percentage
+            else:
+                print("Invalid value – must be between 0 and 100. Percentage not changed.")
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    updated_priority_input = input("New Priority: ").strip()
+    if updated_priority_input != "":
+        try:
+            updated_priority = int(updated_priority_input)
+            if updated_priority > 0:
+                chosen_project.priority = updated_priority
+            else:
+                print("Invalid value, Priority not changed.")
+        except ValueError:
+            print("Invalid input - please enter a valid number")
+
+    print("Project updated.")
 
 
 if __name__ == "__main__":
