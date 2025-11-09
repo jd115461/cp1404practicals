@@ -1,10 +1,10 @@
 """
 CP1404/CP5632 Practical 7 - Project Management Program task
 
-Estimated time: 2 hours
+Estimated time: 3.5 hours
 Actual time:
 """
-
+import datetime
 from project import Project
 
 FILENAME = "projects.txt"
@@ -37,7 +37,7 @@ def main():
         elif choice == "D":
             display_projects(projects)
         elif choice == "F":
-            pass
+            filter_projects(projects)
         elif choice == "A":
             add_project(projects)
         elif choice == "U":
@@ -46,6 +46,9 @@ def main():
             print("Invalid menu choice")
         print(MENU)
         choice = input(">>> ").strip().upper()
+    save_choice = input(f"Would you like to save to {FILENAME}? ").strip().lower()
+    if save_choice in ("y", "yes"):
+        save_projects(FILENAME, projects)
     print("Thank you for using custom-built project management software.")
 
 
@@ -55,14 +58,13 @@ def load_projects(filename):
         input_file.readline()
         for line in input_file:
             parts = line.strip().split("\t")
-            name, start_date, priority_str, cost_str, completion_str = parts
-
-            priority = int(priority_str)
-            cost_estimate = float(cost_str)
-            completion_percentage = int(completion_str)
-
-            project = Project(name, start_date, priority, cost_estimate, completion_percentage)
-            projects.append(project)
+            if len(parts) == 5:
+                name, start_date, priority_str, cost_str, completion_str = parts
+                priority = int(priority_str)
+                cost_estimate = float(cost_str)
+                completion_percentage = int(completion_str)
+                project = Project(name, start_date, priority, cost_estimate, completion_percentage)
+                projects.append(project)
     return projects
 
 
@@ -90,8 +92,30 @@ def display_projects(projects):
         print(f" {project}")
 
 
-def sort_projects():
-    pass
+def get_date_to_sort(project):
+    return project.get_project_date()
+
+
+def filter_projects(projects):
+    date_string = input("Show projects that start after date (dd/mm/yyyy): ").strip()
+    try:
+        filter_date = datetime.datetime.strptime(date_string, "%d/%m/%Y").date()
+    except ValueError:
+        print("Invalid date format. Please use dd/mm/yyyy.")
+        return
+
+    filtered_projects = []
+    for project in projects:
+        project_date = project.get_project_date()
+        if project_date and project_date.date() >= filter_date:
+            filtered_projects.append(project)
+    filtered_projects.sort(key=get_date_to_sort)
+
+    if not filtered_projects:
+        print("No projects found starting on or after that date.")
+    else:
+        for project in filtered_projects:
+            print(project)
 
 
 def add_project(projects):
@@ -125,7 +149,7 @@ def add_project(projects):
         try:
             cost_estimate = float(input("Cost estimate: $"))
             if cost_estimate < 0:
-                print("Number must be > 0")
+                print("Number must be greater than or equal to 0")
             else:
                 is_valid_input = True
         except ValueError:
@@ -152,7 +176,7 @@ def update_project(projects):
     """Prompt user for a project number and update com"""
     incomplete_projects = [project for project in projects if not project.is_complete()]
     if not incomplete_projects:
-        print("All projects have been completed .")
+        print("All projects have been completed.")
         return
 
     for i, project in enumerate(incomplete_projects, start=1):
@@ -165,14 +189,14 @@ def update_project(projects):
             if chosen_project <= 0:
                 print("Number must be > 0")
             elif chosen_project > len(incomplete_projects):
-                print("Invalid book number")
+                print("Invalid project number")
             else:
                 is_valid_input = True
         except ValueError:
             print("Invalid input - please enter a valid number")
 
     chosen_project = incomplete_projects[chosen_project - 1]
-    print(f"Selected {chosen_project}")
+    print(f"Selected: {chosen_project}")
 
     updated_percentage_input = input("New Percentage: ").strip()
     if updated_percentage_input != "":
@@ -189,7 +213,7 @@ def update_project(projects):
     if updated_priority_input != "":
         try:
             updated_priority = int(updated_priority_input)
-            if updated_priority > 0:
+            if 0 <= updated_priority <= 10:
                 chosen_project.priority = updated_priority
             else:
                 print("Invalid value, Priority not changed.")
