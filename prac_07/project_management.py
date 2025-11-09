@@ -1,8 +1,8 @@
 """
 CP1404/CP5632 Practical 7 - Project Management Program task
-
+Create a program that completes the required applications with a loaded CSV file
 Estimated time: 3.5 hours
-Actual time:
+Actual time:3 hours 51 minutes
 """
 import datetime
 from project import Project
@@ -53,6 +53,7 @@ def main():
 
 
 def load_projects(filename):
+    """Load projects from selected file."""
     projects = []
     with open(filename, "r", encoding="utf-8-sig") as input_file:
         input_file.readline()
@@ -119,7 +120,7 @@ def filter_projects(projects):
 
 
 def add_project(projects):
-    """Prompt for a new project and add it as incomplete to the list"""
+    """Prompt for a new project and add it as incomplete to the list."""
     print("Let's add a new project")
     name = input("Name: ").strip()
     while name == "":
@@ -173,7 +174,7 @@ def add_project(projects):
 
 
 def update_project(projects):
-    """Prompt user for a project number and update com"""
+    """Prompt user for a project number and update completion percentage and/or priority."""
     incomplete_projects = [project for project in projects if not project.is_complete()]
     if not incomplete_projects:
         print("All projects have been completed.")
