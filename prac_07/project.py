@@ -2,7 +2,7 @@
 CP1404/CP5632 Practical
 
 """
-from datetime import date
+import datetime
 
 
 class Project:
@@ -27,3 +27,10 @@ class Project:
     def is_complete(self):
         """Return True if the project is 100% complete."""
         return self.completion_percentage >= 100
+
+    def get_project_date(self):
+        try:
+            return datetime.datetime.strptime(self.start_date, "%d/%m/%Y")
+        except ValueError:
+            return None
+
